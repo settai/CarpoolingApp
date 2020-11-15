@@ -1,7 +1,6 @@
 package com.gi2.servicedecovoiturage;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,34 +12,25 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.client.Firebase;
 import com.gi2.servicedecovoiturage.logregform.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
 
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.UUID;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -48,6 +38,7 @@ public class ProfileFragment extends Fragment {
 
     TextView username;
     TextView email;
+    TextView cne;
 
     private Button btnChoose, btnLogout;
     private ImageView imageView;
@@ -88,8 +79,11 @@ public class ProfileFragment extends Fragment {
         username = (TextView)view.findViewById(R.id.username);
         username.setText(LoginActivity.currentUser.getUsername());
 
-        email = (TextView)view.findViewById(R.id.email);
+        email = (TextView)view.findViewById(R.id.reported_user);
         email.setText(LoginActivity.currentUser.getEmail());
+
+        cne = (TextView)view.findViewById(R.id.cne);
+        cne.setText(LoginActivity.currentUser.getCNE());
 
         btnChoose = (Button) view.findViewById(R.id.btnChoose);
         imageView = (ImageView) view.findViewById(R.id.profilePicture);

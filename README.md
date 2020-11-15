@@ -1,61 +1,53 @@
-<p align="center"><img width=12.5% src="https://github.com/ChmaraX/logregform-android/blob/master/app/src/main/res/drawable/logo_noshadow.png"></p>
-<p align="center" text> <b>Authentication form for Android </p>
+# Carpooling-App - Ride Sharing Mobile App
 
-<p align="center">
-<img src="https://img.shields.io/pypi/status/Django.svg"/>
-<a href="https://codeclimate.com/github/ChmaraX/logregform-android/maintainability"><img src="https://api.codeclimate.com/v1/badges/c3bd5593b9920bf9022a/maintainability"/></a>
-<a href="https://github.com/ChmaraX/logregform-android/issues"><img src="https://img.shields.io/github/issues/ChmaraX/logregform-android.svg"/></a>
-<img src="https://img.shields.io/badge/contributions-welcome-orange.svg"/>
-<a href="https://github.com/ChmaraX/logregform-android/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
-</p>
+## Description
 
+This is a carpooling mobile app, it allows its users to connect public transit riders to drivers headed in the same direction. passengers save time and enjoy a more comfortable ride, while drivers save some money by sharing the cost of the commute.
 
-## Basic Overview
+## Technologies
 
-> Android authentication form based on Firebase with few features, custom animation and design. 
+This is a fully native android app, based on the following technologies : 
+
+- Firebase Realtime Database for storing data
+- Native android (JAVA)
+- Google Cloud Functions for sending notifications to users.
+- Google Maps API
 
 ## Features
 
-- [x] Registration activity with email and password, also storing and username into database. 
-- [x] Login activity with email/password, remembering logged user. 
-- [x] Password reset activity (sending an email to user)
-- [x] Wrong inputs errors
-- [x] Welcome splash screen
-- [x] Button gradients (on-click transitions)
-- [ ] Social app login (not connected to API)
+- GoogleMaps API integration for location services such as selecting arrival and destination point
+- Both offers and requests can be posted by users.
+- User Rating and Report System
+- Invitation System
+- Chat System
+- Admin dashboard
 
+## **Getting Started**
 
+- Download the latest Android Studio.
 
-## Interface Preview 
+[https://developer.android.com/studio/](https://developer.android.com/studio/)
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/ChmaraX/logregform-android/master/Preview/3.jpeg" width="210"/>
-  <img src="https://raw.githubusercontent.com/ChmaraX/logregform-android/master/Preview/4.jpeg" width="210"/>
-  <img src="https://raw.githubusercontent.com/ChmaraX/logregform-android/master/Preview/1.jpeg" width="210"/>
-  <img src="https://raw.githubusercontent.com/ChmaraX/logregform-android/master/Preview/2.jpeg" width="210"/>
-</p>
+- Connect an Android mobile phone to your system if you want to deploy the app on your device, otherwise use the emulator on Android Studio.
 
-#### Splashscreen
- <img src="https://raw.githubusercontent.com/ChmaraX/logregform-android/master/Preview/splash.gif" width="210"/>
+[https://developer.android.com/studio/run/emulator](https://developer.android.com/studio/run/emulator)
 
-## Implementation
+- Clone or download the project from this GitHub repository.
+- Use Android Studio to open the project.
 
-#### google-services.json
-You need to set up your own [Firebase](https://firebase.google.com/) authenticator + database and download `google-services.json` file, then add it to `YourApp/app` folder:
+Navigate to the app folder in the root of the Carpool app project folder. Choose app folder to open project in Android Studio
 
-The dependencies are already set up.
+## **Troubleshooting**
 
-``` Java
-dependencies {
+If the app does not run at first, run Gradle Sync.
 
-...
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+Tools → Android → Sync Project with Gradle Files
 
-    compile 'com.google.firebase:firebase-core:15.0.0'
-    compile 'com.google.firebase:firebase-auth:15.0.0'
-    compile 'com.google.firebase:firebase-database:15.0.0'
+If there is an issue with Gradle not being installed, see:
 
-}
-```
+[https://gradle.org/install/](https://gradle.org/install/)
+
+## Screenshots / Preview
+
+![CarpoolingApp Preview Part1](demo/carpool1.jpg)
+![CarpoolingApp Preview Part2](demo/carpool2.jpg)

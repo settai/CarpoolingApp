@@ -68,7 +68,6 @@ public class InteractionsActivity extends AppCompatActivity {
         loadDatabase();
         initCurrentUser();
 
-        Toast.makeText(this, "CURRENT Username = "+currentUser.getEmail(), Toast.LENGTH_SHORT).show();
     }
 
     private void loadDatabase(){
@@ -108,7 +107,7 @@ public class InteractionsActivity extends AppCompatActivity {
 
     private void initCurrentUser(){
 
-        currentUser = new UserProfile("test","test","test","test");
+        currentUser = new UserProfile("test","test","test","test","test",false,"test");
 
         String currentDriverUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         //Toast.makeText(this, "UID IS "+currentDriverUID, Toast.LENGTH_SHORT).show();
@@ -123,7 +122,10 @@ public class InteractionsActivity extends AppCompatActivity {
 
                             currentUser.setUsername(documentSnapshot.getString("username"));
                             currentUser.setEmail(documentSnapshot.getString("email"));
-
+                            currentUser.setAdmin(documentSnapshot.getBoolean("admin"));
+                            currentUser.setUserid(documentSnapshot.getString("userid"));
+                            currentUser.setAdmin(documentSnapshot.getBoolean("admin"));
+                            currentUser.setPending(documentSnapshot.getBoolean("pending"));
                         } else {
                             Toast.makeText(InteractionsActivity.this, "Document does not exist", Toast.LENGTH_SHORT).show();
                         }

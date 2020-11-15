@@ -48,22 +48,10 @@ public class LoginActivity extends AppCompatActivity {
         user = firebaseAuth.getCurrentUser();
 
         if(user != null) {
-
-            initCurrentUser();
-            progressDialog.setMessage("Verificating...");
-            progressDialog.show();
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    progressDialog.dismiss();
-                    Toast.makeText(LoginActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
-                    finish();
-                    startActivity(new Intent(LoginActivity.this,RideOld.class));
-                }
-            }, 1000);
-
+            initCurrentUserAndLaunchActivity();
         }
+
+
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,18 +97,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    initCurrentUser();
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            progressDialog.dismiss();
-                            Toast.makeText(LoginActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this,RideOld.class));
-                        }
-                    }, 2000);
-
-
+                    initCurrentUserAndLaunchActivity();
                 }
                 else{
                     progressDialog.dismiss();
@@ -165,14 +142,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private void initCurrentUser(){
+    private void initCurrentUserAndLaunchActivity(){
 
-        currentUser = new UserProfile("test","test","test","test");
 
-        String currentDriverUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        //Toast.makeText(this, "UID IS "+currentDriverUID, Toast.LENGTH_SHORT).show();
+        currentUser = new UserProfile("test","test","test","test","test",false,"test");
+
+        final String currentDriverUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         DocumentReference currentDriverInfo = database.collection("users").document(currentDriverUID);
 
+        progressDialog.setMessage("Verificating...");
+        progressDialog.show();
 
         currentDriverInfo.get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -183,8 +163,31 @@ public class LoginActivity extends AppCompatActivity {
                             currentUser.setUsername(documentSnapshot.getString("username"));
                             currentUser.setEmail(documentSnapshot.getString("email"));
                             currentUser.setPhoneNumber(documentSnapshot.getString("phone-number"));
+                            currentUser.setCNE(documentSnapshot.getString("CNE"));
+                            currentUser.setAdmin(documentSnapshot.getBoolean("admin"));
+                            currentUser.setPending(documentSnapshot.getBoolean("pending"));
+                            currentUser.setUserid(currentDriverUID);
 
-                        } else {
+
+                            if(!currentUser.getPending()) {
+                                Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                finish();
+                                if (currentUser.isAdmin()) {
+                                    Toast.makeText(LoginActivity.this, "Welcome administrator!", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(LoginActivity.this, adminBar.class));
+                                }
+                                else
+                                {
+                                    startActivity(new Intent(LoginActivity.this, RideOld.class));
+                                }
+                            }
+
+                            else Toast.makeText(LoginActivity.this, "Sorry you are not yet approved by the admin", Toast.LENGTH_SHORT).show();
+
+                            progressDialog.dismiss();
+                        }
+
+                        else {
                             Toast.makeText(LoginActivity.this , "Document does not exist", Toast.LENGTH_SHORT).show();
                         }
                     }

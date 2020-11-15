@@ -7,20 +7,48 @@ public class UserProfile {
     private String password;
     private String email;
     private String phoneNumber;
+    private String CNE;
+    private Boolean admin;
+    private Boolean pending;
+    private String userid;
+
 
 
     public UserProfile() {
         //firebase constructor
     }
 
+    public String getUserid() {
+        return userid;
+    }
+    public Boolean getPending() {
+        return pending;
+    }
+    public void setPending(Boolean pend) {
+        this.pending=pend;
+    }
+    public void setUserid(String id) {
+        this.userid = id;
+    }
 
-    public UserProfile(String username, String password, String email, String phoneNumber) {
-
+    public UserProfile(String username, String password, String email, String phoneNumber,String CNE, Boolean type,String id) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.CNE = CNE;
+        this.admin = type;
+        this.userid=id;
+        this.pending=true;
+    }
 
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
+    }
+
+
+    public Boolean isAdmin() {
+        return admin;
     }
 
     public String getUsername() {
@@ -49,6 +77,14 @@ public class UserProfile {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public String getCNE() {
+        return CNE;
+    }
+
+    public void setCNE(String CNE) {
+        this.CNE = CNE;
     }
 
     public void setPhoneNumber(String phoneNumber) {
